@@ -1,0 +1,11 @@
+song.hpp : generator
+	./generator
+
+generator : generator.o rtttl_player.o
+	g++ -std=c++17 generator.o rtttl_player.o -o generator
+
+generator.o : generator.cpp rtttl_player.hpp note_printer.hpp
+	g++ -std=c++17 -c generator.cpp -o generator.o
+
+rtttl_player.o : rtttl_player.cpp rtttl_player.hpp
+	g++ -std=c++17 -c rtttl_player.cpp -o rtttl_player.o
