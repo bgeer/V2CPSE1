@@ -1,3 +1,17 @@
-decompressor: compressor.cpp compressor.hpp decompressor.hpp wilhelmus.txt
-	g++ -std=c++17 compressor.cpp compressor.hpp decompressor.hpp -o decompressor
-	./decompressor
+fileFiller: fileFiller.o
+	g++ fileFiller.o -o fileFiller.exe
+
+fileFiller.o: fileFiller.cpp match.hpp compressor.hpp
+	g++ -c fileFiller.cpp -o fileFiller.o
+
+clean:
+	rm -rf *o fileFiller.exe compressed.asm
+	make clean
+
+run: fileFiller
+ifneq ("$(wildcard compressed.asm)","")
+	make run
+else
+	./fileFiller.exe
+	make run
+endif

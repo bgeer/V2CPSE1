@@ -22,18 +22,23 @@ int main( void ){
    }
    
    f2 << ".global compressed" << std::endl;
+   f2 << ".cpu cortex-m0" << std::endl;
+   f2 << ".data" << std::endl;
    f2 << "compressed:" << std::endl;
-   f2 << "\t.asciz: ";
+   f2 << "\t.asciz \"";
 
    compressor.compress( 
       [ &f1 ]()-> int { auto c = f1.get(); return f1.eof() ? '\0' : c; },
       [ &f2 ]( char c ){ 
          if( c == '\n' ){
-            f2.put('!');
+            f2.put('\\');
+            f2.put('n');
          }else{
-            f2.put( c ); }
+            f2.put( c ); 
+         }
          }
    );
+   f2.put('\"');
    
    f1.close();
    f2.close();

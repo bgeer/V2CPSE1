@@ -31,6 +31,7 @@ SEARCH  :=
 RELATIVE := $(RELATIVE)../
 include $(RELATIVE)Makefile.due
 
+CLEAN += song.hpp generator.o rtttl_player.o 
 
 
 song.hpp : generator

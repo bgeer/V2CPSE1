@@ -8,5 +8,7 @@ string:
     .align 1
 
 application:
+    push { lr }
     ldr r0, =string
     bl print_asciz
+    pop { pc }
